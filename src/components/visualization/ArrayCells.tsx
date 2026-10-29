@@ -62,7 +62,9 @@ export function ArrayCells({
               animate={{
                 borderColor: role === 'idle' ? 'var(--color-line-strong)' : roleColor(role),
                 backgroundColor:
-                  role === 'idle' ? 'var(--color-canvas)' : `${roleColor(role)}22`,
+                  role === 'idle'
+                    ? 'var(--color-canvas)'
+                    : `color-mix(in srgb, ${roleColor(role)} 16%, transparent)`,
               }}
               transition={{ duration: 0.16 }}
               className={cn(

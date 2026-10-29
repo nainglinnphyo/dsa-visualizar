@@ -1,12 +1,14 @@
 import { lazy, Suspense, type ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { AppShell } from '@/components/layout/AppShell';
+import { LandingPage } from '@/features/landing/LandingPage';
 import { DashboardPage } from '@/features/dashboard/DashboardPage';
 import { NotFoundPage } from '@/features/misc/NotFoundPage';
 
 /**
- * Every visualizer is loaded on demand. The dashboard ships in the entry
- * bundle because it is the landing page; everything else is its own chunk.
+ * Every visualizer is loaded on demand. The landing page and the dashboard
+ * ship in the entry bundle because they are the two entry points; everything
+ * else is its own chunk.
  */
 const ArraysPage = lazy(() =>
   import('@/features/arrays/ArraysPage').then((m) => ({ default: m.ArraysPage })),
@@ -74,11 +76,12 @@ const page = (element: ReactNode): ReactNode => (
 );
 
 export const router = createBrowserRouter([
+  { path: '/', element: <LandingPage /> },
   {
     path: '/',
     element: <AppShell />,
     children: [
-      { index: true, element: <DashboardPage /> },
+      { path: 'dashboard', element: <DashboardPage /> },
       { path: 'data-structures/arrays', element: page(<ArraysPage />) },
       { path: 'data-structures/linked-lists', element: page(<LinkedListsPage />) },
       { path: 'data-structures/stacks', element: page(<StacksPage />) },

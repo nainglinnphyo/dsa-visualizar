@@ -79,7 +79,7 @@ export function StackCanvas({ state, step }: StackCanvasProps) {
                       backgroundColor:
                         role === 'idle'
                           ? 'var(--color-canvas)'
-                          : `${roleColor(role)}22`,
+                          : `color-mix(in srgb, ${roleColor(role)} 16%, transparent)`,
                     }}
                   >
                     <span className="text-[10px] text-ink-dim">[{index}]</span>

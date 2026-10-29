@@ -35,7 +35,7 @@ export const NAV_SECTIONS: NavSection[] = [
     items: [
       {
         label: 'Dashboard',
-        to: '/',
+        to: '/dashboard',
         icon: LayoutDashboard,
         blurb: 'Everything available in one place, with suggested starting points.',
       },

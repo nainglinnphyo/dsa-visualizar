@@ -44,7 +44,8 @@ input ──▶ pure algorithm ──▶ AlgorithmResult<T>  ──▶ PlaybackC
     line mapping used to highlight the executing line.
 - **`src/algorithms/`** — pure implementations. No React, no DOM, no timers.
 - **`src/features/`** — one folder per topic: a canvas component, a page, and
-  its learning content.
+  its learning content. `landing/` is the public page at `/`; `dashboard/` is
+  the in-app index at `/dashboard`.
 - **`src/components/`** — the shared shell: playback controls, code panel,
   complexity panel, statistics, operation history, layout and UI primitives.
 - **`src/hooks/`** — `usePlayback`, `useKeyboardPlayback`, `useAlgorithmTrace`
@@ -61,6 +62,32 @@ shell.
 Each recorded step owns its own copy of the state. Backward navigation is then a
 plain array index rather than an inverse operation, which removes a whole class
 of "undo is subtly wrong" bugs and makes the trace directly testable.
+
+## Routes
+
+`/` is a landing page describing what the tool offers — its hero demo runs the
+real bubble sort through the real playback controller rather than looping a
+canned animation. `/dashboard` is the in-app index, and every visualizer lives
+under `/data-structures/*` or `/algorithms/*`.
+
+The landing page quotes catalogue counts as literals so the entry bundle does
+not have to import every algorithm module; `catalog.test.ts` asserts those
+numbers against the real registries, so they cannot drift.
+
+## Theming
+
+Light and dark are both first-class, with a third "system" setting that follows
+the OS and keeps following it live. The choice persists in `localStorage`.
+
+Everything is driven by CSS custom properties: the `@theme` block in
+`src/index.css` defines the dark palette, and `:root[data-theme='light']`
+overrides the same token names. Because Tailwind v4 compiles utilities to
+`var(--color-*)`, no component needed changing — `bg-canvas`, `text-ink` and
+the visualization role colours all follow the active theme on their own.
+
+An inline script in `index.html` resolves and applies the theme before first
+paint, so there is no flash of the wrong palette on load. It mirrors
+`resolveTheme()` in `src/theme/theme.ts`; the two must stay in step.
 
 ## What's covered
 

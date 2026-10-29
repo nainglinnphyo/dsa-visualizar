@@ -9,7 +9,7 @@ export function NotFoundPage() {
         title="Nothing here"
         description="That route does not exist. Pick a visualizer from the sidebar, or head back to the dashboard."
       />
-      <Link to="/" className="btn btn-primary w-fit">
+      <Link to="/dashboard" className="btn btn-primary w-fit">
         Back to dashboard
       </Link>
     </>

@@ -34,6 +34,50 @@
   --color-viz-sorted: #34d399;
   --color-viz-pivot: #a78bfa;
   --color-viz-visited: #22d3ee;
+
+  /* Foreground for filled accent surfaces, and the accent hover shade. */
+  --color-on-accent: #04121c;
+  --color-accent-hover: #5fcbfa;
+}
+
+/*
+ * The @theme block above is the dark palette, which is the default. The light
+ * palette below overrides the same tokens, so every utility and every
+ * `var(--color-*)` in a component follows along with no component changes.
+ *
+ * `data-theme` is written by the inline script in index.html before first
+ * paint, and kept current by the theme store.
+ */
+:root[data-theme='light'] {
+  --color-canvas: #f6f8fc;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1f5f9;
+  --color-surface-3: #e5eaf1;
+  --color-line: #dde4ed;
+  --color-line-strong: #c3ccd9;
+
+  --color-ink: #0f172a;
+  --color-ink-soft: #46556b;
+  --color-ink-dim: #64748b;
+
+  --color-accent: #0369a1;
+  --color-accent-soft: #e0f2fe;
+  --color-violet: #6d28d9;
+  --color-emerald: #047857;
+  --color-amber: #b45309;
+  --color-rose: #be123c;
+  --color-cyan: #0e7490;
+
+  --color-viz-idle: #94a3b8;
+  --color-viz-compare: #d97706;
+  --color-viz-swap: #e11d48;
+  --color-viz-active: #0284c7;
+  --color-viz-sorted: #059669;
+  --color-viz-pivot: #7c3aed;
+  --color-viz-visited: #0891b2;
+
+  --color-on-accent: #ffffff;
+  --color-accent-hover: #025d8f;
 }
 
 @layer base {
@@ -42,8 +86,13 @@
   }
 
   html {
+    /* The resolved theme also sets color-scheme inline, before first paint. */
     color-scheme: dark;
     scrollbar-color: var(--color-line-strong) transparent;
+  }
+
+  html[data-theme='light'] {
+    color-scheme: light;
   }
 
   body {
@@ -52,6 +101,11 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-soft);
+    color: var(--color-ink);
   }
 
   :focus-visible {
@@ -127,12 +181,12 @@
   .btn-primary {
     background-color: var(--color-accent);
     border-color: var(--color-accent);
-    color: #04121c;
+    color: var(--color-on-accent);
     font-weight: 600;
   }
   .btn-primary:hover:not(:disabled) {
-    background-color: #5fcbfa;
-    border-color: #5fcbfa;
+    background-color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
   }
   .btn-icon {
     padding: 0.4375rem;

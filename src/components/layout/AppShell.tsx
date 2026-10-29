@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
+import { ThemeToggle } from '@/theme/ThemeToggle';
+import { useSystemThemeSync } from '@/theme/useSystemThemeSync';
 
 export function AppShell() {
   const [navOpen, setNavOpen] = useState(false);
   const { pathname } = useLocation();
+  useSystemThemeSync();
 
   // Close the drawer on navigation and scroll the workspace back to the top.
   useEffect(() => {
@@ -27,6 +30,7 @@ export function AppShell() {
             <Menu size={16} aria-hidden />
           </button>
           <span className="text-sm font-semibold">DSA Visualizer</span>
+          <ThemeToggle className="ml-auto" />
         </header>
         <main id="workspace" className="min-w-0 flex-1 px-4 py-5 sm:px-6 lg:px-8">
           <Outlet />

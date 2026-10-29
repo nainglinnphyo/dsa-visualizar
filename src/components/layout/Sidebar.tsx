@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { X } from 'lucide-react';
 import { NAV_SECTIONS } from '@/app/navigation';
+import { ThemeToggle } from '@/theme/ThemeToggle';
 import { cn } from '@/lib/cn';
 
 interface SidebarProps {
@@ -57,7 +58,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                   <li key={item.to}>
                     <NavLink
                       to={item.to}
-                      end={item.to === '/'}
+                      end={item.to === '/dashboard'}
                       onClick={onClose}
                       className={({ isActive }) =>
                         cn(
@@ -84,6 +85,11 @@ export function Sidebar({ open, onClose }: SidebarProps) {
               </ul>
             </div>
           ))}
+        </div>
+
+        <div className="border-t border-line px-4 py-3">
+          <p className="panel-title mb-1.5">Theme</p>
+          <ThemeToggle size="full" className="w-full" />
         </div>
 
         <div className="border-t border-line px-4 py-3 text-[11px] leading-relaxed text-ink-dim">
